@@ -1,5 +1,5 @@
-import ParsingController
 import sys
+import ParsingController
 
 
 def time_tracker():

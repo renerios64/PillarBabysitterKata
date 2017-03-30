@@ -11,4 +11,8 @@ class ParsingController:
         self.parser.add_argument("end", type=str, help="This is the end time. Using a 24 hr clock.")
 
     def parse(self, command_line_input):
+        self.check_inputs(command_line_input)
         return self.parser.parse_args(command_line_input)
+
+    def check_inputs(self, command_line_input):
+        pass
