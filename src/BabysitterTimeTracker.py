@@ -1,4 +1,5 @@
-import argparse
+import ParsingController
+import sys
 
 
 def time_tracker():
@@ -7,4 +8,6 @@ def time_tracker():
 
 if __name__ == "__main__":
     time_tracker()
-    parsingController = ParsingController()
+    parsingController = ParsingController.ParsingController()
+    arguments = parsingController.parse(sys.argv[1:])
+
