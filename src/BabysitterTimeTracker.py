@@ -1,6 +1,10 @@
+import argparse
+
+
 def time_tracker():
-    print "Hello, this is the Babysitter Time Tracker!"
+    print "Hello, welcome to Babysitter Time Tracker!"
 
 
 if __name__ == "__main__":
     time_tracker()
+    parsingController = ParsingController()
