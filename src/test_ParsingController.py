@@ -42,6 +42,13 @@ class TestParsingController(unittest.TestCase):
 
         self.assertEqual(cm.exception.code, 102)
 
+    def test_invalid_end_time(self):
+        test_input = [1700, 1100]
+
+        with self.assertRaises(SystemExit) as cm:
+            self.CUT._check_end_time(test_input[1])
+
+        self.assertEqual(cm.exception.code, 103)
 
 
 
