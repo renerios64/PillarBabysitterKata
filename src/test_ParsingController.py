@@ -21,8 +21,20 @@ class TestParsingController(unittest.TestCase):
     def test_parse_with_too_many_parameters(self):
         test_input = ['1700', '2300', 'blah']
 
-        arguments = self.CUT.parse(test_input)
+        with self.assertRaises(SystemExit) as cm:
+            arguments = self.CUT.parse(test_input)
 
-        self.assertRaises(argparse.ArgumentError, "Argument Error was raised")
+        self.assertEqual(cm.exception.code, 100)
+
+    def test_parse_with_too_few_paramenters(self):
+        test_input = ['1700']
+
+        with self.assertRaises(SystemExit) as cm:
+            arguments = self.CUT.parse(test_input)
+
+        self.assertEqual(cm.exception.code, 101)
+
+
+
 
 

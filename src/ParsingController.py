@@ -15,4 +15,7 @@ class ParsingController:
         return self.parser.parse_args(command_line_input)
 
     def check_inputs(self, command_line_input):
-        pass
+        if len(command_line_input) > 2:
+            exit(100)
+        if len(command_line_input) < 2:
+            exit(101)
