@@ -12,7 +12,7 @@ class ParsingController:
 
     def parse(self, command_line_input):
         self._check_inputs(command_line_input)
-
+        self._check_start_time(command_line_input[0])
         return self.parser.parse_args(command_line_input)
 
     def _check_inputs(self, command_line_input):
@@ -20,3 +20,7 @@ class ParsingController:
             exit(100)
         if len(command_line_input) < 2:
             exit(101)
+
+    def _check_start_time(self, start_time):
+        if start_time < 1700:
+            exit(102)

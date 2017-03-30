@@ -38,7 +38,7 @@ class TestParsingController(unittest.TestCase):
         test_input = [1200, 2300]
 
         with self.assertRaises(SystemExit) as cm:
-            self.CUT._check_inputs(test_input)
+            self.CUT._check_start_time(test_input[0])
 
         self.assertEqual(cm.exception.code, 102)
 
