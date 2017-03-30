@@ -16,3 +16,12 @@ class TestParsingController(unittest.TestCase):
 
         self.assertEqual(arguments.start, '1700', 'Start time is correct!')
         self.assertEqual(arguments.end, '2300', 'End time is correct!')
+
+    def test_parse_invalid_time_in(self):
+        assert False
+
+    def test_parse_invalid_time_out(self):
+        assert False
+
+    def test_parse_invalid_time_out_and_time_in(self):
+        assert False
