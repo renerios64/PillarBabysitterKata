@@ -24,3 +24,7 @@ class ParsingController:
     def _check_start_time(self, start_time):
         if start_time < 1700:
             exit(102)
+
+    def _check_end_time(self, end_time):
+        if end_time > 400:
+            exit(103)

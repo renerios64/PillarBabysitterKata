@@ -1,5 +1,4 @@
 import unittest
-import argparse
 
 import ParsingController
 

@@ -1,5 +1,6 @@
 import sys
 import ParsingController
+import CompensationCalculator
 
 
 def time_tracker():
