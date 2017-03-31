@@ -59,6 +59,13 @@ class TestCompensationCalculator(unittest.TestCase):
 
     def test_find_hrs_after_midnight_when_start_time_is_after_midnight(self):
         self.CUT = CompensationCalculator.CompensationCalculator(100, 500)
-        self.CUT.find_hrs_between_bedtime_and_midnight()
+        self.CUT.find_hrs_after_midnight()
 
-        self.assertEqual(self.CUT.between_bedtime_and_midnight_hrs, 4, "4 hours after midnight")
+        self.assertEqual(self.CUT.after_midnight_hrs, 4, "4 hours after midnight")
+
+    def test_find_hrs_after_midnight_when_start_time_and_end_time_are_before_midnight(self):
+        self.CUT = CompensationCalculator.CompensationCalculator(1900, 2300)
+
+        self.CUT.find_hrs_after_midnight()
+
+        self.assertEqual(self.CUT.after_midnight_hrs, 0, "0 hours after midnight")
