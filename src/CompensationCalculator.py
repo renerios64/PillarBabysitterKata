@@ -8,7 +8,11 @@ class CompensationCalculator:
         self.after_midnight_rate = 16
         self._before_bedtime_amount = 0
 
+    def get_before_bedtime_amount(self):
+        return self._before_bedtime_amount
 
-
+    def _before_bedtime_calculation(self):
+        elapse_time = (self.bedtime - self.start_time) / 100
+        self._before_bedtime_amount = elapse_time * self.before_bedtime_rate
 
 
