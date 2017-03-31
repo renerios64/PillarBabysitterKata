@@ -11,7 +11,7 @@ class TestParsingController(unittest.TestCase):
         pass
 
     def test_parse_valid_time_in_and_time_out(self):
-        test_input = [1700, 2300]
+        test_input = ['1700', '2300']
         arguments = self.CUT.parse(test_input)
 
         self.assertEqual(arguments.start, 1700, 'Start time is correct!')
@@ -41,6 +41,14 @@ class TestParsingController(unittest.TestCase):
 
         self.assertEqual(cm.exception.code, 102)
 
+    def test_invalid_start_time_v2(self):
+        test_input = [2500, 2300]
+
+        with self.assertRaises(SystemExit) as cm:
+            self.CUT._check_start_time(test_input[0])
+
+        self.assertEqual(cm.exception.code, 102)
+
     def test_invalid_end_time(self):
         test_input = [1700, 1100]
 
@@ -48,6 +56,38 @@ class TestParsingController(unittest.TestCase):
             self.CUT._check_end_time(test_input[1])
 
         self.assertEqual(cm.exception.code, 103)
+
+    def test_invalid_end_time_v2(self):
+        test_input = [1700, 2500]
+
+        with self.assertRaises(SystemExit) as cm:
+            self.CUT._check_end_time(test_input[1])
+
+        self.assertEqual(cm.exception.code, 103)
+
+    def test_end_time_before_start_time(self):
+        test_input = [400, 300]
+
+        with self.assertRaises(SystemExit) as cm:
+            self.CUT._check_start_time_before_end_time(test_input)
+
+        self.assertEqual(cm.exception.code, 104)
+
+    def test_end_time_before_start_time_in_earliest_to_bedtime_range(self):
+        test_input = [1900, 1800]
+
+        with self.assertRaises(SystemExit) as cm:
+            self.CUT._check_start_time_before_end_time(test_input)
+
+        self.assertEqual(cm.exception.code, 104)
+
+    def test_end_time_before_start_time_in_bedtime_to_midnight_range(self):
+        test_input = [2200, 2100]
+
+        with self.assertRaises(SystemExit) as cm:
+            self.CUT._check_start_time_before_end_time(test_input)
+
+        self.assertEqual(cm.exception.code, 104)
 
 
 
