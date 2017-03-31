@@ -88,10 +88,3 @@ class TestParsingController(unittest.TestCase):
             self.CUT._check_start_time_before_end_time(test_input)
 
         self.assertEqual(cm.exception.code, 104)
-
-
-
-
-
-
-
