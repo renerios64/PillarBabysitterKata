@@ -121,3 +121,10 @@ class TestCompensationCalculator(unittest.TestCase):
         self.CUT.calculate_payment()
 
         self.assertEqual(self.CUT.payment, 100, "100 dollars total payment")
+
+    def test_calculate_payment_for_full_nights_work(self):
+        self.CUT = CompensationCalculator.CompensationCalculator(1700, 400)
+
+        self.CUT.calculate_payment()
+
+        self.assertEqual(self.CUT.payment, 132, "132 dollars total payment for full nights work")

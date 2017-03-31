@@ -29,11 +29,11 @@ class ParsingController:
             exit(101)
 
     def _check_start_time(self, start_time):
-        if self.EARLIEST_TIME > start_time >= self.LATEST_TIME or start_time > self.MIDNIGHT24:
+        if self.EARLIEST_TIME > start_time > self.LATEST_TIME or start_time > self.MIDNIGHT24:
             exit(102)
 
     def _check_end_time(self, end_time):
-        if self.EARLIEST_TIME > end_time >= self.LATEST_TIME or end_time > self.MIDNIGHT24:
+        if self.EARLIEST_TIME > end_time > self.LATEST_TIME or end_time > self.MIDNIGHT24:
             exit(103)
 
     def _check_start_time_before_end_time(self, test_input):

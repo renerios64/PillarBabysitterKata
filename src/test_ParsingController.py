@@ -17,6 +17,13 @@ class TestParsingController(unittest.TestCase):
         self.assertEqual(arguments.start, 1700, 'Start time is correct!')
         self.assertEqual(arguments.end, 2300, 'End time is correct!')
 
+    def test_parse_valid_time_in_and_time_out_all_times_afte_midnight(self):
+        test_input = ['100', '400']
+        arguments = self.CUT.parse(test_input)
+
+        self.assertEqual(arguments.start, 100, 'Start time is correct!')
+        self.assertEqual(arguments.end, 400, 'End time is correct!')
+
     def test_parse_with_too_many_parameters(self):
         test_input = [1700, 2300, 'blah']
 
