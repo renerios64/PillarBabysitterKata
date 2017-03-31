@@ -62,6 +62,21 @@ class CompensationCalculator:
 
         self.after_midnight_hrs = hrs
 
+    def collect_hours_in_ranges(self):
+        self.find_hrs_before_bedtime()
+        self.find_hrs_between_bedtime_and_midnight()
+        self.find_hrs_after_midnight()
+
+    def calculate_amounts_in_ranges(self):
+        self.collect_hours_in_ranges()
+        self.before_bedtime_amount = self.before_bedtime_hrs * self._before_bedtime_rate
+        self.between_bedtime_and_midnight_amount = self.between_bedtime_and_midnight_hrs * self._between_bedtime_and_midnight_rate
+        self.after_midnight_amount = self.after_midnight_hrs * self._after_midnight_rate
+
+    def calculate_payment(self):
+        self.calculate_amounts_in_ranges()
+        self.payment = self.before_bedtime_amount + self.between_bedtime_and_midnight_amount + self.after_midnight_amount
+
 
 
 

@@ -102,3 +102,22 @@ class TestCompensationCalculator(unittest.TestCase):
         self.CUT.find_hrs_after_midnight()
 
         self.assertEqual(self.CUT.after_midnight_hrs, 0, "0 hours after midnight")
+
+    def test_collect_hours_in_ranges(self):
+        self.CUT.collect_hours_in_ranges()
+
+        self.assertEqual(self.CUT.before_bedtime_hrs, 3, "3 hours before bedtime!")
+        self.assertEqual(self.CUT.between_bedtime_and_midnight_hrs, 4, "4 hours between bedtime and midnight")
+        self.assertEqual(self.CUT.after_midnight_hrs, 2, "2 hours after midnight")
+
+    def test_calculate_amounts_in_ranges(self):
+        self.CUT.calculate_amounts_in_ranges()
+
+        self.assertEqual(self.CUT.before_bedtime_amount, 36, "36 dollars before bed")
+        self.assertEqual(self.CUT.between_bedtime_and_midnight_amount, 32, "32 dollars between bedtime and midnight")
+        self.assertEqual(self.CUT.after_midnight_amount, 32, "32 dollars after midnight")
+
+    def test_calculate_payment(self):
+        self.CUT.calculate_payment()
+
+        self.assertEqual(self.CUT.payment, 100, "100 dollars total payment")
