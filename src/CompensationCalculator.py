@@ -3,15 +3,15 @@ class CompensationCalculator:
         self.start_time = start_time
         self.end_time = end_time
 
-        self._earliest_time = 1700
-        self._latest_time = 500
-        self._bedtime = 2000
-        self._midnight24 = 2400
-        self._midnight0 = 0
+        self.EARLIEST_TIME = 1700
+        self.LATEST_TIME = 500
+        self.BEDTIME = 2000
+        self.MIDNIGHT24 = 2400
+        self.MIDNIGHT0 = 0
 
-        self._before_bedtime_rate = 12
-        self._between_bedtime_and_midnight_rate = 8
-        self._after_midnight_rate = 16
+        self.BEFORE_BEDTIME_RATE = 12
+        self.BETWEEN_BEDTIME_AND_MIDNIGHT_RATE = 8
+        self.AFTER_MIDNIGHT_RATE = 16
 
         self.before_bedtime_hrs = 0
         self.between_bedtime_and_midnight_hrs = 0
@@ -23,39 +23,39 @@ class CompensationCalculator:
         self.payment = 0
 
     def find_hrs_before_bedtime(self):
-        if self._earliest_time <= self.start_time <= self._bedtime:
-            if self._earliest_time <= self.end_time <= self._bedtime:
+        if self.EARLIEST_TIME <= self.start_time <= self.BEDTIME:
+            if self.EARLIEST_TIME <= self.end_time <= self.BEDTIME:
                 hrs = (self.end_time - self.start_time) / 100
             else:
-                hrs = (self._bedtime - self.start_time) / 100
+                hrs = (self.BEDTIME - self.start_time) / 100
         else:
             hrs = 0
 
         self.before_bedtime_hrs = hrs
 
     def find_hrs_between_bedtime_and_midnight(self):
-        if self._earliest_time <= self.start_time <= self._bedtime:
-            if self._earliest_time <= self.end_time <= self._bedtime:
+        if self.EARLIEST_TIME <= self.start_time <= self.BEDTIME:
+            if self.EARLIEST_TIME <= self.end_time <= self.BEDTIME:
                 hrs = 0
-            elif self._bedtime <= self.end_time <= self._midnight24:
-                hrs = (self.end_time - self._bedtime) / 100
-            elif self._midnight0 <= self.end_time <= self._latest_time:
-                hrs = (self._midnight24 - self._bedtime) / 100
-        elif self._bedtime <= self.start_time <= self._midnight24:
-            if self._bedtime <= self.end_time <= self._midnight24:
+            elif self.BEDTIME <= self.end_time <= self.MIDNIGHT24:
+                hrs = (self.end_time - self.BEDTIME) / 100
+            elif self.MIDNIGHT0 <= self.end_time <= self.LATEST_TIME:
+                hrs = (self.MIDNIGHT24 - self.BEDTIME) / 100
+        elif self.BEDTIME <= self.start_time <= self.MIDNIGHT24:
+            if self.BEDTIME <= self.end_time <= self.MIDNIGHT24:
                 hrs = (self.end_time - self.start_time) / 100
-            elif self._midnight0 <= self.end_time <= self._latest_time:
-                hrs = (self._midnight24 - self.start_time) / 100
-        elif self._midnight0 <= self.start_time <= self._latest_time:
+            elif self.MIDNIGHT0 <= self.end_time <= self.LATEST_TIME:
+                hrs = (self.MIDNIGHT24 - self.start_time) / 100
+        elif self.MIDNIGHT0 <= self.start_time <= self.LATEST_TIME:
             hrs = 0
 
         self.between_bedtime_and_midnight_hrs = hrs
 
     def find_hrs_after_midnight(self):
-        if self._midnight0 <= self.start_time <= self._latest_time:
+        if self.MIDNIGHT0 <= self.start_time <= self.LATEST_TIME:
             hrs = (self.end_time - self.start_time) / 100
         else:
-            if self._midnight0 <= self.end_time <= self._latest_time:
+            if self.MIDNIGHT0 <= self.end_time <= self.LATEST_TIME:
                 hrs = self.end_time / 100
             else:
                 hrs = 0
@@ -69,9 +69,9 @@ class CompensationCalculator:
 
     def calculate_amounts_in_ranges(self):
         self.collect_hours_in_ranges()
-        self.before_bedtime_amount = self.before_bedtime_hrs * self._before_bedtime_rate
-        self.between_bedtime_and_midnight_amount = self.between_bedtime_and_midnight_hrs * self._between_bedtime_and_midnight_rate
-        self.after_midnight_amount = self.after_midnight_hrs * self._after_midnight_rate
+        self.before_bedtime_amount = self.before_bedtime_hrs * self.BEFORE_BEDTIME_RATE
+        self.between_bedtime_and_midnight_amount = self.between_bedtime_and_midnight_hrs * self.BETWEEN_BEDTIME_AND_MIDNIGHT_RATE
+        self.after_midnight_amount = self.after_midnight_hrs * self.AFTER_MIDNIGHT_RATE
 
     def calculate_payment(self):
         self.calculate_amounts_in_ranges()
