@@ -19,8 +19,13 @@ class CompensationCalculator:
         self.after_midnight_amount = elapse_time * self._after_midnight_rate
 
     def _between_bedtime_and_midnight_calculation(self):
-        elapse_time = (self._midnight - self._bedtime) / 100
-        self.between_bedtime_and_midnight_amount = elapse_time * self._between_bedtime_and_midnight_rate
+        if 0 < self.end_time < 500:
+            elapse_time = (self._midnight - self._bedtime) / 100
+            self.between_bedtime_and_midnight_amount = elapse_time * self._between_bedtime_and_midnight_rate
+        else:
+            elapse_time = (self.end_time - self._bedtime) / 100
+            self.between_bedtime_and_midnight_amount = elapse_time * self._between_bedtime_and_midnight_rate
+
 
 
 

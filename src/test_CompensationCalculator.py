@@ -32,3 +32,8 @@ class TestCompensationCalculator(unittest.TestCase):
 
         self.assertEqual(self.CUT.between_bedtime_and_midnight_amount, 24,
                          "3 hours between bedtime and midnight = 24 dollars")
+
+    def test_total_amount_to_collect(self):
+        self.CUT.payment_calculator()
+
+        self.assertEqual(self.CUT.payment, 100, "From 1700 until 500 the cost = 100")
