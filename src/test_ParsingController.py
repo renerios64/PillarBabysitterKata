@@ -30,7 +30,7 @@ class TestParsingController(unittest.TestCase):
         with self.assertRaises(SystemExit) as cm:
             self.CUT._check_inputs(test_input)
 
-        self.assertEqual(cm.exception.code, 100)
+        self.assertEqual(cm.exception.code, "Too many arguments!")
 
     def test_parse_with_too_few_paramenters(self):
         test_input = [1700]
@@ -38,7 +38,7 @@ class TestParsingController(unittest.TestCase):
         with self.assertRaises(SystemExit) as cm:
             self.CUT._check_inputs(test_input)
 
-        self.assertEqual(cm.exception.code, 101)
+        self.assertEqual(cm.exception.code, "Too few arguments!")
 
     def test_invalid_start_time(self):
         test_input = [1200, 2300]
@@ -46,7 +46,7 @@ class TestParsingController(unittest.TestCase):
         with self.assertRaises(SystemExit) as cm:
             self.CUT._check_start_time(test_input[0])
 
-        self.assertEqual(cm.exception.code, 102)
+        self.assertEqual(cm.exception.code, "Start Time out of range. Valid times are from 1700 to 2400 and 0 to 0400.")
 
     def test_invalid_start_time_v2(self):
         test_input = [2500, 2300]
@@ -54,7 +54,7 @@ class TestParsingController(unittest.TestCase):
         with self.assertRaises(SystemExit) as cm:
             self.CUT._check_start_time(test_input[0])
 
-        self.assertEqual(cm.exception.code, 102)
+        self.assertEqual(cm.exception.code, "Start Time out of range. Valid times are from 1700 to 2400 and 0 to 0400.")
 
     def test_invalid_end_time(self):
         test_input = [1700, 1100]
@@ -62,7 +62,7 @@ class TestParsingController(unittest.TestCase):
         with self.assertRaises(SystemExit) as cm:
             self.CUT._check_end_time(test_input[1])
 
-        self.assertEqual(cm.exception.code, 103)
+        self.assertEqual(cm.exception.code, "End Time out of range. Valid times are from 1700 to 2400 and 0 to 0400.")
 
     def test_invalid_end_time_v2(self):
         test_input = [1700, 2500]
@@ -70,7 +70,7 @@ class TestParsingController(unittest.TestCase):
         with self.assertRaises(SystemExit) as cm:
             self.CUT._check_end_time(test_input[1])
 
-        self.assertEqual(cm.exception.code, 103)
+        self.assertEqual(cm.exception.code, "End Time out of range. Valid times are from 1700 to 2400 and 0 to 0400.")
 
     def test_end_time_before_start_time(self):
         test_input = [400, 300]
@@ -78,7 +78,7 @@ class TestParsingController(unittest.TestCase):
         with self.assertRaises(SystemExit) as cm:
             self.CUT._check_start_time_before_end_time(test_input)
 
-        self.assertEqual(cm.exception.code, 104)
+        self.assertEqual(cm.exception.code, "Starting Time comes after End Time")
 
     def test_end_time_before_start_time_in_earliest_to_bedtime_range(self):
         test_input = [1900, 1800]
@@ -86,7 +86,7 @@ class TestParsingController(unittest.TestCase):
         with self.assertRaises(SystemExit) as cm:
             self.CUT._check_start_time_before_end_time(test_input)
 
-        self.assertEqual(cm.exception.code, 104)
+        self.assertEqual(cm.exception.code, "Starting Time comes after End Time")
 
     def test_end_time_before_start_time_in_bedtime_to_midnight_range(self):
         test_input = [2200, 2100]
@@ -94,4 +94,4 @@ class TestParsingController(unittest.TestCase):
         with self.assertRaises(SystemExit) as cm:
             self.CUT._check_start_time_before_end_time(test_input)
 
-        self.assertEqual(cm.exception.code, 104)
+        self.assertEqual(cm.exception.code, "Starting Time comes after End Time")
