@@ -37,8 +37,8 @@ class CompensationCalculator:
         self.before_bedtime_hrs = hrs
 
     def find_hrs_between_bedtime_and_midnight(self):
-        if self.EARLIEST_TIME <= self.start_time <= self.BEDTIME:
-            if self.EARLIEST_TIME <= self.end_time <= self.BEDTIME:
+        if self._time_is_between_earliest_time_and_bed_time(self.start_time):
+            if self._time_is_between_earliest_time_and_bed_time(self.end_time):
                 hrs = 0
             elif self.BEDTIME <= self.end_time <= self.MIDNIGHT24:
                 hrs = (self.end_time - self.BEDTIME) / 100
