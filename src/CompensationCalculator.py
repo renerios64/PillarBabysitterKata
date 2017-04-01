@@ -31,12 +31,27 @@ class CompensationCalculator:
     def _time_is_between_midnight_and_latest_time(self, time):
         return self.MIDNIGHT0 <= time <= self.LATEST_TIME
 
+    def _calculate_hrs_before_bedtime(self):
+        if self._time_is_between_earliest_time_and_bed_time(self.end_time):
+            hrs = (self.end_time - self.start_time) / 100
+        else:
+            hrs = (self.BEDTIME - self.start_time) / 100
+
+        return hrs
+
+    def _calculate_hrs_between_bedtime_and_midnight_with_start_time_before_bedtime(self):
+        if self._time_is_between_earliest_time_and_bed_time(self.end_time):
+            hrs = 0
+        elif self._time_is_between_bedtime_and_midnight(self.end_time):
+            hrs = (self.end_time - self.BEDTIME) / 100
+        elif self._time_is_between_midnight_and_latest_time(self.end_time):
+            hrs = (self.MIDNIGHT24 - self.BEDTIME) / 100
+
+        return hrs
+
     def find_hrs_before_bedtime(self):
         if self._time_is_between_earliest_time_and_bed_time(self.start_time):
-            if self._time_is_between_earliest_time_and_bed_time(self.end_time):
-                hrs = (self.end_time - self.start_time) / 100
-            else:
-                hrs = (self.BEDTIME - self.start_time) / 100
+            hrs = self._calculate_hrs_before_bedtime()
         else:
             hrs = 0
 
@@ -44,12 +59,7 @@ class CompensationCalculator:
 
     def find_hrs_between_bedtime_and_midnight(self):
         if self._time_is_between_earliest_time_and_bed_time(self.start_time):
-            if self._time_is_between_earliest_time_and_bed_time(self.end_time):
-                hrs = 0
-            elif self._time_is_between_bedtime_and_midnight(self.end_time):
-                hrs = (self.end_time - self.BEDTIME) / 100
-            elif self._time_is_between_midnight_and_latest_time(self.end_time):
-                hrs = (self.MIDNIGHT24 - self.BEDTIME) / 100
+            hrs = self._calculate_hrs_between_bedtime_and_midnight_with_start_time_before_bedtime()
         elif self._time_is_between_bedtime_and_midnight(self.start_time):
             if self._time_is_between_bedtime_and_midnight(self.end_time):
                 hrs = (self.end_time - self.start_time) / 100
