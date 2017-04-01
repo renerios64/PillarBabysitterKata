@@ -143,10 +143,10 @@ class TestCompensationCalculator(unittest.TestCase):
         self.assertTrue(self.CUT._time_is_between_bedtime_and_midnight(2300),
                         "The time is between bedtime and midnight")
 
-    def test_that_time_is_NOT_between_bedtime_and_midnight_before_range(self):
+    def test_that_time_is_NOT_between_bedtime_and_midnight_range(self):
         self.assertFalse(self.CUT._time_is_between_bedtime_and_midnight(1700),
                          "The time is NOT between bedtime and midnight")
 
-    def test_that_time_is_NOT_between_bedtime_and_midnight_after_range(self):
+    def test_that_time_is_NOT_between_midnight_and_latest_time_range(self):
         self.assertFalse(self.CUT._time_is_betwen_bedtime_and_midnight(200),
                          "The time is NOT between bedtime and midnight")
