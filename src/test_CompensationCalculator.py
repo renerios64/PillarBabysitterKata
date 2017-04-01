@@ -171,6 +171,4 @@ class TestCompensationCalculator(unittest.TestCase):
             3, "3 hours between bedtime and midnight!")
 
     def test_calculate_hrs_after_midnight(self):
-        self.CUT = CompensationCalculator.CompensationCalculator(100, 200)
-
-        self.assertEqual(self.CUT._calculate_hrs_after_midnight(), 1, "1 hour after midnight!")
+        self.assertEqual(self.CUT._calculate_hrs_after_midnight(), 2, "2 hour after midnight!")
