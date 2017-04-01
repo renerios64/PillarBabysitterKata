@@ -131,6 +131,13 @@ class TestCompensationCalculator(unittest.TestCase):
 
         self.assertEqual(self.CUT.payment, 132, "132 dollars total payment for full nights work")
 
+    def test_calculate_payment_for_only_2_hours_of_work_after_midnight(self):
+        self.CUT = CompensationCalculator.CompensationCalculator(100, 300)
+
+        self.CUT.calculate_payment()
+
+        self.assertEqual(self.CUT.payment, 32, "32 dollars total payment for 2 hours of work after midnight")
+
     def test_that_time_is_between_earliest_time_and_bedtime(self):
         self.assertTrue(self.CUT._time_is_between_earliest_time_and_bed_time(1700),
                         "The time is between the earliest time and bedtime")
