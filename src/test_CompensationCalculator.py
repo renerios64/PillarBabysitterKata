@@ -149,7 +149,7 @@ class TestCompensationCalculator(unittest.TestCase):
 
     def test_that_time_is_between_midnight_and_latest_time_range(self):
         self.assertTrue(self.CUT._time_is_between_midnight_and_latest_time(200),
-                         "The time is NOT between bedtime and midnight")
+                        "The time is NOT between bedtime and midnight")
 
     def test_that_time_is_NOT_between_midnight_and_latest_time_range(self):
         self.assertFalse(self.CUT._time_is_between_midnight_and_latest_time(800),
@@ -159,6 +159,18 @@ class TestCompensationCalculator(unittest.TestCase):
         self.assertEqual(self.CUT._calculate_hrs_before_bedtime(), 3,
                          "3 hours before bedtime!")
 
-    def test_calculate_hrs_between_bedtime_and_midnight_with_start_time_before_bedtime(self):
+    def test_calculate_hrs_between_bedtime_and_midnight_with_start_time_before_bedtime_and_midnight(self):
         self.assertEqual(self.CUT._calculate_hrs_between_bedtime_and_midnight_with_start_time_before_bedtime(),
                          4, "4 hours between bedtime and midnight!")
+
+    def test_calculate_hrs_between_bedtime_and_midnight_with_start_time_between_bedtime_and_midnight(self):
+        self.CUT = CompensationCalculator.CompensationCalculator(2100, 200)
+
+        self.assertEqual(
+            self.CUT._calculate_hrs_between_bedtime_and_midnight_with_start_time_between_bedtime_and_midnight(),
+            3, "3 hours between bedtime and midnight!")
+
+    def test_calculate_hrs_after_midnight(self):
+        self.CUT = CompensationCalculator.CompensationCalculator(100, 200)
+
+        self.assertEqual(self.CUT._calculate_hrs_after_midnight(), 1, "1 hour after midnight!")
