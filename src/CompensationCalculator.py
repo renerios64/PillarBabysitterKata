@@ -48,14 +48,14 @@ class CompensationCalculator:
                 hrs = 0
             elif self._time_is_between_bedtime_and_midnight(self.end_time):
                 hrs = (self.end_time - self.BEDTIME) / 100
-            elif self.MIDNIGHT0 <= self.end_time <= self.LATEST_TIME:
+            elif self._time_is_between_midnight_and_latest_time(self.end_time):
                 hrs = (self.MIDNIGHT24 - self.BEDTIME) / 100
-        elif self.BEDTIME <= self.start_time <= self.MIDNIGHT24:
-            if self.BEDTIME <= self.end_time <= self.MIDNIGHT24:
+        elif self._time_is_between_bedtime_and_midnight(self.start_time):
+            if self._time_is_between_bedtime_and_midnight(self.end_time):
                 hrs = (self.end_time - self.start_time) / 100
-            elif self.MIDNIGHT0 <= self.end_time <= self.LATEST_TIME:
+            elif self._time_is_between_midnight_and_latest_time(self.end_time):
                 hrs = (self.MIDNIGHT24 - self.start_time) / 100
-        elif self.MIDNIGHT0 <= self.start_time <= self.LATEST_TIME:
+        elif self._time_is_between_midnight_and_latest_time(self.start_time):
             hrs = 0
 
         self.between_bedtime_and_midnight_hrs = hrs
